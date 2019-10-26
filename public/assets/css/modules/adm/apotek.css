@@ -1,0 +1,45 @@
+.mt1em{
+	margin-top: 1em;
+}
+#audioPlayer{
+	width: 1px;
+    height:1px;
+    position: absolute;
+    top: 0;
+    overflow: hidden;
+    opacity: .5;
+}
+.kotak-a{
+	border: 1px solid rgb(52, 152, 219);
+    
+    background: #fff;
+}
+.kotak-c{
+	border:solid 1px #e74c3c;
+    background: #fff;
+}
+.kotak-b{
+	border-top: 1px solid rgb(46, 204, 113);
+    border-right: none;
+    border-bottom: 1px solid rgb(46, 204, 113);
+    border-left: 1px solid rgb(46, 204, 113);
+    background: #fff;
+}
+.kotak-title{
+	background-color: rgb(52, 152, 219);
+    margin: 0 -16px;
+    padding: 10px .2em;
+    color: #fff;
+    
+}
+.kotak-title > i{
+    font-size: .8em;
+
+}
+div#admLoket > div.col-md-4 > p.text-center{
+	padding: .2em;
+	font-size: 120%;
+	min-height: 36px;
+	font-weight: bold;
+	margin: .2em;
+}

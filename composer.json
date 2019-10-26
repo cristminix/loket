@@ -1,0 +1,24 @@
+{
+    "name": "dansky/loket",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Loket\\": "src"
+        }
+    },
+    "require": {
+        "codeigniter/framework": "3.1.10",
+        "paragonie/random_compat": "^9.99",
+        "phpseclib/phpseclib": "^2.0",
+        "cboden/ratchet": "^0.4",
+        "react/zmq": "0.2.*|0.3.*",
+        "mike42/escpos-php": "^3.0",
+        "stil/gd-text": "^1.1"
+    },
+    "authors": [
+        {
+            "name": "Putra",
+            "email": "cristminix@gmail.com"
+        }
+    ]
+}
