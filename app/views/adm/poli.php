@@ -39,7 +39,7 @@
 	}
 </script>
 <script type="text/javascript" src="<?=base_url()?>public/assets/js/app/helper.js"></script>
-	<script type="text/javascript" src="<?=base_url()?>public/assets/js/modules/adm/poli.js"></script>
+<script type="text/javascript" src="<?=base_url()?>public/assets/js/modules/adm/poli.js?<?=md5(microtime())?>"></script>
 </head>
 <body>
 
@@ -82,7 +82,7 @@
 									</tr>
 									<tr v-else v-for="(v,idx) in list">
 										<td><span v-text="idx+1"></span></td>
-										<td><span v-text="v.nama"></span></td>
+										<td><a href="javascript:;" @click="insertToQueue(v)"><span v-text="v.nama"></span></a></td>
 										<td><span v-text="v.alamat"></span></td>
 										<td><span v-text="v.waktu_mulai"></span></td>
 										<td><span v-text="v.status=='1'?'Menunggu':(v.status==3?'Lewat':'-')"></span></td>

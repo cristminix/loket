@@ -134,11 +134,11 @@ class Artisan extends CI_Controller
     public function gen_lic()
     {
 
-        $nama_instansi = 'PUSKESMAS LARANGAN';
-        $alamat = 'Jl. Raya Larangan No. 18 Kec. Larangan 52262';
-        $telp = '(0283)6183926';
+        $nama_instansi = 'P**KE**AS ***';
+        $alamat = 'Jl. Raya *** No. ** Kec. BLA** 522**';
+        $telp = '(0283)6183***';
         $nama_kabupaten = 'KAB. BREBES';
-        $email = "puskesmas.larangan672@gmail.com";
+        $email = "sutoyocutez@gmail.com";
 
         $hwid = License::GetHardwareId('c');
         License::GenerateSerialNumber($hwid);
