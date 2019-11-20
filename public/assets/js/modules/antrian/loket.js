@@ -1,5 +1,5 @@
 $(document).ready(()=>{
-	
+	let GLOBAL_VOLUME = 0.2;	
 	let loket_data = {};
 	let appMonitorVm = new Vue({
 		el:'#appMonitor',
@@ -18,7 +18,11 @@ $(document).ready(()=>{
 			// videojs('my-player').play();
 
 			// setTimeout(()=>{
-				try{$('video').get(0).play();}catch(e){}
+				try{
+					$('video').get(0).play();
+					$('video').get(0).volume=GLOBAL_VOLUME;
+					
+				}catch(e){}
 			// },10000);
 
 			this.init();
@@ -125,7 +129,11 @@ $(document).ready(()=>{
 			$('.p_curr_no').css('margin-top',mgtop+'px');
 			$('video').css('height',(rh)+'px').css('width','auto');
 			setTimeout(()=>{
-				try{$('video').get(0).play();}catch(e){}
+				try{
+					$('video').get(0).play();
+					$('video').get(0).volume=GLOBAL_VOLUME;
+
+				}catch(e){}
 			},2000);
 		},500);
 	}).resize();
@@ -164,6 +172,8 @@ $(document).ready(()=>{
 	try {
 	  // try on ios
 	  player.volume(1);
+	  $('video').get(0).volume=GLOBAL_VOLUME;
+	  
 	  player.play();
 	} catch (e) {}
 	//player.playlist(videoList, 4);/// play video 5

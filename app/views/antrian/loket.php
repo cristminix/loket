@@ -21,7 +21,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<script type="text/javascript" src="<?=base_url()?>public/assets/js/vue.min.js"></script>
 	<script type="text/javascript" src="<?=base_url()?>public/assets/js/autobahn.js"></script>
 
-	<script type="text/javascript" src="<?=base_url()?>public/assets/js/modules/antrian/loket.js"></script>
+	<script type="text/javascript" src="<?=base_url()?>public/assets/js/modules/antrian/loket.js?<?=md5(microtime())?>"></script>
 <script type="text/javascript">
 	function base_url(str) {
 		return '<?=base_url()?>'+(typeof str != 'undefined'?str:'');
@@ -51,7 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			
 		</div>
 		<div class="col-md-7 b-video" style="overflow: hidden;">
-			<video class="video-js vjs-default-skin" controls ></video>
+			<video class="video-js vjs-default-skin" controls id="aplayer" volume="0.3"></video>
 <button class="previous">Previous</button>
 <button class="next">Next</button>
 <button class="jump">Play Third</button>
