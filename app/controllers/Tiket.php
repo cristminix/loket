@@ -319,6 +319,7 @@ class Tiket extends CI_Controller {
 
 		/*****************************************************************************/
 		$response['status'] = 'OK_PRINT';
+		$response['nomor_antrian']=$nomor_antrian;
 
 
 		$context = new ZMQContext();
