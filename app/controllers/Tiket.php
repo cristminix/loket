@@ -232,7 +232,7 @@ class Tiket extends CI_Controller {
         $box->setBox(0,130,$width,40);
 
         $box->setTextAlign('center','top');
-        $box->draw('NO. ANTRIAN ' . strtoupper($jenis));
+        $box->draw('NO. ANTRIAN ' . strtoupper(app_cfg('tiket_print_titles',$jenis)));
 
         $box = new Box($image);
         $box->setFontFace($roboto_bold);
@@ -291,7 +291,7 @@ class Tiket extends CI_Controller {
         try {
             // Enter the share name for your USB printer here
             // $connector = null;
-            $connector = new WindowsPrintConnector("POS-80C");
+            $connector = new WindowsPrintConnector(app_cfg('printer_share_name'));
             $printer = new Printer($connector);
 
             ///////////////////////////////////////////
@@ -304,6 +304,7 @@ class Tiket extends CI_Controller {
                 /* Images not supported on your PHP, or image file not found */
                 $printer -> text($e -> getMessage() . "\n");
             }
+            $printer -> text("\n");
             $printer -> cut();
 
             ///////////////////////////////////////////

@@ -160,3 +160,15 @@ function string2Hex($string) {
 function hex2String($hexString) {
   return hex2bin($hexString);
 }
+
+function app_cfg($key,$sub=""){
+  $data = get_instance()->config->item($key);
+  if(empty($sub)){
+    return $data;
+  }
+
+  if(isset($data[$sub])){
+    return $data[$sub];
+  }
+  return '';
+}

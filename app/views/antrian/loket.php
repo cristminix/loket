@@ -60,7 +60,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div class="row c" style="position: fixed;bottom: 0;width:100%">
 		<div class="col-md-4" style="background-color: rgb(52, 152, 219);color: #fff;padding-top: 1em;padding-bottom: 0.5em">
 			<div class="text-center">
-				<h2 style="font-size :200%">A . <i style="font-size: 90%">BPJS</i></h2>
+				<h2 style="font-size :200%">A . <i style="font-size: 90%"><?=app_cfg('adm_box_titles','bpjs')?></i></h2>
 				<h2 style="font-size :400%">{{a_cx}}</h2>
 
 			</div>
@@ -68,14 +68,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 		<div class="col-md-4" style="background-color:rgb(46, 204, 113);color: #fff;padding-top: 1em;padding-bottom: 0.5em">
 			<div class="text-center">
-				<h2 style="font-size :200%">B . <i style="font-size: 90%">UMUM</i></h2>
+				<h2 style="font-size :200%">B . <i style="font-size: 90%"><?=app_cfg('adm_box_titles','umum')?></i></h2>
 				<h2 style="font-size :400%">{{b_cx}}</h2>
 				
 			</div>
 		</div>
 		<div class="col-md-4"  style="background-color: rgb(231, 76, 60);color: #fff;padding-top: 1em;padding-bottom: 0.5em">
 			<div class="text-center">
-				<h2 style="font-size :200%">C . <i style="font-size: 90%">LANSIA ANAK</i></h2>
+				<h2 style="font-size :200%">C . <i style="font-size: 90%"><?=app_cfg('adm_box_titles','lansia-anak')?></i></h2>
 				<h2 style="font-size :400%">{{c_cx}}</h2>
 				 
 			</div>

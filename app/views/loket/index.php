@@ -33,9 +33,9 @@
 
 					<li><a target="_blank" href="<?=base_url()?>adm/loket"><i class="fas fa-chalkboard-teacher"></i> Admin Loket</a></li>
 					
-					<li><a target="_blank" href="<?=base_url()?>adm/loket/multiple"><i class="fas fa-chalkboard-teacher"></i> Admin Loket Multiple</a></li>
+					<li><a target="_blank" href="<?=base_url()?>adm/loket/multiple/1"><i class="fas fa-chalkboard-teacher"></i> Admin Loket Multiple</a></li>
 
-					<li><a target="_blank" href="<?=base_url()?>adm/loket/multiple"><i class="fas fa-chalkboard-teacher"></i> Admin Loket Merge</a></li>
+					<li><a target="_blank" href="<?=base_url()?>adm/loket/merge/1_2"><i class="fas fa-chalkboard-teacher"></i> Admin Loket Merge</a></li>
 
 					<li><a target="_blank" href="<?=base_url()?>adm/poli"><i class="fas fa-chalkboard-teacher"></i> Admin Poli</a></li>
 					<li><a target="_blank" href="<?=base_url()?>adm/laborat"><i class="fas fa-chalkboard-teacher"></i> Admin Laborat</a></li>

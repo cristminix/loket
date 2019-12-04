@@ -134,7 +134,7 @@
 			<div class="row" id="admLoket" style="padding: 0 15px">
 				<?if(in_array(1,$jp_ids_arr)):?>
 				<div class="col-md-<?=$grid_width?> kotak-a">
-					<h4 class="text-center kotak-title">A . <i>BPJS</i></h4>
+					<h4 class="text-center kotak-title">A . <i><?=app_cfg('adm_box_titles','bpjs')?></i></h4>
 					<p class="text-center">{{a.nomor}}</p>
 					<div class="row" style="padding: .5em">
 						<div class="col-md-6">
@@ -154,7 +154,7 @@
 				<?endif?>
 				<?if(in_array(2,$jp_ids_arr)):?>
 				<div class="col-md-<?=$grid_width?> kotak-b">
-					<h4 class="text-center kotak-title" style="background-color: rgb(46, 204, 113)">B . <i>UMUM</i></h4>
+					<h4 class="text-center kotak-title" style="background-color: rgb(46, 204, 113)">B . <i><?=app_cfg('adm_box_titles','umum')?></i></h4>
 					<p class="text-center">{{b.nomor}}</p>
 
 					<div class="row" style="padding: .5em">
@@ -174,7 +174,7 @@
 				<?endif?>
 				<?if(in_array(3,$jp_ids_arr)):?>				
 				<div class="col-md-<?=$grid_width?> kotak-c">
-					<h4 class="text-center kotak-title" style="background-color: #e74c3c">C . <i>LANSIA ANAK</i></h4>
+					<h4 class="text-center kotak-title" style="background-color: #e74c3c">C . <i><?=app_cfg('adm_box_titles','lansia-anak')?></i></h4>
 					<p class="text-center">{{c.nomor}}</p>
 
 					<div class="row" style="padding: .5em">
