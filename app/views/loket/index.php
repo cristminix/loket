@@ -32,6 +32,11 @@
 					<!-- <li><a target="_blank" href="<?=base_url()?>antrian/apotik"><i class="fas fa-chalkboard"></i> Display Antrian Apotik</a></li> -->
 
 					<li><a target="_blank" href="<?=base_url()?>adm/loket"><i class="fas fa-chalkboard-teacher"></i> Admin Loket</a></li>
+					
+					<li><a target="_blank" href="<?=base_url()?>adm/loket/multiple"><i class="fas fa-chalkboard-teacher"></i> Admin Loket Multiple</a></li>
+
+					<li><a target="_blank" href="<?=base_url()?>adm/loket/multiple"><i class="fas fa-chalkboard-teacher"></i> Admin Loket Merge</a></li>
+
 					<li><a target="_blank" href="<?=base_url()?>adm/poli"><i class="fas fa-chalkboard-teacher"></i> Admin Poli</a></li>
 					<li><a target="_blank" href="<?=base_url()?>adm/laborat"><i class="fas fa-chalkboard-teacher"></i> Admin Laborat</a></li>
 					<li><a target="_blank" href="<?=base_url()?>adm/apotek"><i class="fas fa-chalkboard-teacher"></i> Admin Apotek</a></li>

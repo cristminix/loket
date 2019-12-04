@@ -1,4 +1,6 @@
 $(document).ready(()=>{
+	console.log('Mode:'+get_xmode());
+
 	function create_loket(item,obj){
 		if(typeof obj == 'undefined'){
 			obj = {};
@@ -326,7 +328,15 @@ $(document).ready(()=>{
 		}
 	});
 	function update_list_loket(ld,firstTime) {
-		let url = base_url()+'adm/loket_list';
+		let mode = get_xmode();
+		let url = base_url()+'adm/loket_list?mode='+ mode;
+
+		if(mode == 'multiple'){
+			url += '&jp_id='+get_jp_id();
+		}
+		if(mode == 'merge'){
+			url += '&jp_ids='+get_jp_ids();
+		}
 		axios.get(url).then((r)=>{
 			//console.log(r);
 			let content = '';
@@ -337,8 +347,8 @@ $(document).ready(()=>{
 
 			}
 			$.each(r.data,(id,item)=>{
-				content += '<tr><td>'+(id+1)+'</td><td>'+item.nomor+'</td><td>'+item.waktu_mulai+'</td><td>'+item.slug.toUpperCase()+'</td><td>'+(item.status=='1'?'Menunggu':(item.status=='3'?'Lewat':'-'))+'</td></tr>'
-					ld
+				content += '<tr jp_id="'+item.jp_id+'"><td>'+(id+1)+'</td><td>'+item.nomor+'</td><td>'+item.waktu_mulai+'</td><td>'+item.slug.toUpperCase()+'</td><td>'+(item.status=='1'?'Menunggu':(item.status=='3'?'Lewat':'-'))+'</td></tr>'
+					
 				if(item.status == 1){
 					if( typeof loket_data[item.slug] == 'undefined'){
 						loket_data[item.slug] = create_loket(item,{});

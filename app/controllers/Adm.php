@@ -3,7 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Adm extends CI_Controller {
 
-	public function loket()
+	// one : satu loket
+	// multiple : dua atau tiga loket per tombol tiket
+	//    param : id_loket
+	// allinone : semua menangani semua
+	// merge    : satu menangani satu , dua menangani lebih dari satu
+	public function loket($mode="one",$param="")
 	{
 		$nama_instansi = License::GetOrganization();
 		$address = License::GetAddress();
@@ -24,26 +29,61 @@ class Adm extends CI_Controller {
 			'telp' => $telp,
 			'dd_poli'=>$dd_poli,
 			'dd_poli_all'=>$dd_poli_all,
-			
+			'mode'=>$mode,
 			'ws_server'=> $this->config->item('ws_server')
 			
 		];
-		$this->load->view('adm/loket', $data);
+		switch ($mode) {
+			case 'multiple':
+				if(empty($param)){
+					die('invalid param');
+				}
+				$data['jps'] = $this->m_jenis_pendaftaran->get_jenis_pendaftaran();
+				$data['jp_id'] = $param;
+			break;
+			case 'merge':
+				if(empty($param)){
+					die('invalid param');
+				}
+				$data['jps'] = $this->m_jenis_pendaftaran->get_jenis_pendaftaran();
+				$data['jp_ids'] = $param;
+				$data['jp_ids_arr'] = explode('_',$param);
+				$data['jp_ids_cx'] = count($data['jp_ids_arr']);
+				// print_r($data['jp_ids_cx']);
+				// die();
+				$data['grid_width'] = 12/$data['jp_ids_cx'] ;
+			break;
+			default:
+				# code...
+				break;
+		}
+		$this->load->view('adm/loket/'.$mode, $data);
 	
 	}
 	// Tampilkan daftar antrian tabular data
 	public function loket_list()
 	{
+		$mode = $this->input->get('mode');
+
+		
+
 		$dt = date('Y-m-d', time());
-		$loket_list = $this->db->select('al.id,al.status,al.nomor,al.waktu_mulai,jp.slug,jp.kode,jp.id jp_id')->where([
+		$db = $this->db->select('al.id,al.status,al.tanggal,al.nomor,al.waktu_mulai,jp.slug,jp.kode,jp.id jp_id')->where([
 									'al.tanggal' => $dt,
 									'al.status <>'=>' 5',
 								])
 							  ->join('m_jenis_pendaftaran jp','al.jp_id=jp.id')
-							  ->order_by('al.id','asc')
-							  ->get('m_antrian_loket al')
-
-							  ->result_array();
+							  ->order_by('al.id','asc');
+		if($mode == 'multiple'){
+			$jp_id = $this->input->get('jp_id');
+			$db->where('jp.id',$jp_id);
+		}
+		if($mode == 'merge'){
+			$jp_ids = $this->input->get('jp_ids');
+			$jp_ids = explode('_', $jp_ids);
+			$db->where_in('jp.id',$jp_ids);
+		}
+		$loket_list = $db->get('m_antrian_loket al')->result_array();
 		echo json_encode($loket_list);
 	}
 	public function poli_list($id_poli="0")

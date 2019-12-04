@@ -21,8 +21,11 @@
 	<script type="text/javascript" src="<?=base_url()?>public/assets/js/autobahn.js"></script>
 
 	<script type="text/javascript" src="<?=base_url()?>public/assets/js/app/helper.js"></script>
-	<script type="text/javascript" src="<?=base_url()?>public/assets/js/modules/adm/loket.js"></script>
+	<script type="text/javascript" src="<?=base_url()?>public/assets/js/modules/adm/loket.js?_=<?=md5(microtime())?>"></script>
 <script type="text/javascript">
+	function get_xmode() {
+		return '<?=$mode?>';
+	}
 	function base_url(){
 		return '<?=base_url()?>';
 	}
