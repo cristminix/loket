@@ -1,6 +1,17 @@
+function reQueue(item_64){
+	if(confirm('Aktifkan Kembali ?')){
+		let item = JSON.parse(atob(item_64));
+		// console.log(item);
+		let url = base_url()+'adm/loket_requeue/'+item_64;
+		axios.post(url,{id:item}).then((r)=>{
+
+		});
+	}
+	
+}
 $(document).ready(()=>{
 	console.log('Mode:'+get_xmode());
-
+	
 	function create_loket(item,obj){
 		if(typeof obj == 'undefined'){
 			obj = {};
@@ -347,8 +358,20 @@ $(document).ready(()=>{
 
 			}
 			$.each(r.data,(id,item)=>{
-				content += '<tr jp_id="'+item.jp_id+'"><td>'+(id+1)+'</td><td>'+item.nomor+'</td><td>'+item.waktu_mulai+'</td><td>'+item.slug.toUpperCase()+'</td><td>'+(item.status=='1'?'Menunggu':(item.status=='3'?'Lewat':'-'))+'</td></tr>'
-					
+				// content += '<tr jp_id="'+item.jp_id+'"><td>'+(id+1)+'</td><td>'+item.nomor+'</td><td>'+item.waktu_mulai+'</td><td>'+item.slug.toUpperCase()+'</td><td>'+(item.status=='1'?'Menunggu':(item.status=='3'?'Lewat':'-'))+'</td></tr>'
+				let number = id+1;
+				let slug=item.slug.toUpperCase();
+				let item_64 = btoa(JSON.stringify(item));
+				let lewat_a = `<a href="javascript:;" onclick="reQueue('${item_64}')">Lewat</a>`;
+				let status_text=item.status=='1'?'Menunggu':(item.status=='3'?lewat_a:'-');
+
+				content += `<tr jp_id="${item.jp_id}">
+							<td>${number}</td>
+							<td>${item.nomor}</td>
+							<td>${item.waktu_mulai}</td>
+							<td>${slug}</td>
+							<td>${status_text}</td></tr>`;	
+
 				if(item.status == 1){
 					if( typeof loket_data[item.slug] == 'undefined'){
 						loket_data[item.slug] = create_loket(item,{});

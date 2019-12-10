@@ -60,6 +60,43 @@ class Adm extends CI_Controller {
 		$this->load->view('adm/loket/'.$mode, $data);
 	
 	}
+	public function loket_requeue($item_64)
+	{
+	 	$item = json_decode(base64_decode($item_64),true);
+	 	// print_r($item);
+	 	// die();
+	 	
+	 	$id = $item['id'];
+	 	unset($item['id']);
+	 	unset($item['waktu_mulai']);
+	 	unset($item['status']);
+	 	unset($item['slug']);
+	 	unset($item['kode']);
+	 	
+	 	$data = ['status'=>1,'waktu_mulai'=>date('H:i:s')];
+
+	 	$new_item = array_merge($item,$data);
+	 
+
+	 	if(!empty($id)){
+	 		$rs = $this->db->where('id',$id)
+	 					   ->where('status',3)
+	 					   ->get('m_antrian_loket');
+	 		if($rs->num_rows() > 0){
+
+	 			$this->db->where('id',$id)
+	 					 ->delete('m_antrian_loket');
+
+	 			$this->db->insert('m_antrian_loket',$new_item);
+	 					 		 
+	 			$context = new ZMQContext();
+			    $socket = $context->getSocket(ZMQ::SOCKET_PUSH);
+			    $socket->connect('tcp://127.0.0.1:5555');
+			    // // print_r($socket);
+			    $socket->send(json_encode(['cat'=>'onCetakTiket','data'=>$new_item]));
+	 		}
+	 	}
+	} 
 	// Tampilkan daftar antrian tabular data
 	public function loket_list()
 	{
