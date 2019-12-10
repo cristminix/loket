@@ -211,6 +211,65 @@
 }
 </style>
 <script type="text/javascript">
+	window.CMDATA={
+		cx : 0,
+		max: 5,
+		diff: 5,
+		date: null,
+		init:()=>{
+			CMDATA.cx = 1;
+			CMDATA.date = new Date();
+		}
+	};
+	function do_check()
+	{
+	    var return_value=prompt("Password:");
+	    if(btoa(return_value+'s**t')==="MTIzNDU2NzhzKip0")
+	        return true;
+	    else
+	        return false;
+
+	}
+	function context_menu_check() {
+		// body...
+		// check jumlah klik kanan
+		if(CMDATA.date == null){
+			CMDATA.init();
+		}else{
+			var b = new Date();
+			var difference = Math.abs((b.getTime() - CMDATA.date.getTime()) / 1000);
+			if(difference <= CMDATA.diff){
+				CMDATA.cx += 1; 
+				CMDATA.date = new Date();
+
+				if(CMDATA.cx >= CMDATA.max){
+					return true;
+				}
+			}else{
+				CMDATA.init();
+			}
+		}
+		return false;
+		// :label_a
+		// jika nol
+			// tambah satu
+			// simpan waktu klik
+		// :label_b
+		// jika sama dengan >= 3
+			// buka kontex menu // return 1
+			// hapus waktu sebelumnya dengan waktu sekarang
+				// set jumlah klik = 0
+		// jika lebih dari nol
+			// cek waktu klik sebelumnya
+			// periksa jedah detik dari waktu klik sekarang
+				// jika kurang dari sama dengan 3 detik
+					// goto:label_b
+				// jika tidak
+					// hapus waktu sebelumnya dengan waktu sekarang
+					// set jumlah klik = 0
+					// goto:label_a	
+		// return -1
+	}
 	$(document).ready(() => {
 		$('button.prnt-ifr').click(()=>{
 			let btn = $(event.target);
@@ -294,6 +353,12 @@
 		//Show contextmenu:
 		  $(document).contextmenu(function(e){
 		    //Get window size:
+		    if(!context_menu_check()){
+		    	e.preventDefault();
+		    	return false;
+		    }
+		    CMDATA.cx=0;
+		    CMDATA.date=null;
 		    var winWidth = $(document).width();
 		    var winHeight = $(document).height();
 		    //Get pointer position:
@@ -340,25 +405,33 @@
 		    $(".contextmenu").hide();
 		  });
 		  $('a#resetData').on('click',()=>{
+		  	$(".contextmenu").hide();
 		  	if(confirm('Apakah Anda yakin ingin mereset data ?')){
 		  		let postData = {
 
 		  		};
 		  		lock_browser('<h4>Mohon Menunggu ...</h4>');
 		  		let url = base_url() + 'tiket/reset';
+		  		if(do_check()){
+		  			axios.post(url, postData).then((r)=>{
+			  			$('#info-modal .modal-title').text('Informasi');
+				    	$('#info-modal span.text').html('<span style="font-size: 150%;font-style: italic;"> Data antrian telah direset !</span>');
+				    	$('#info-modal').modal();
 
-		  		axios.post(url, postData).then((r)=>{
-		  			$('#info-modal .modal-title').text('Informasi');
-			    	$('#info-modal span.text').html('<span style="font-size: 150%;font-style: italic;"> Data antrian telah direset !</span>');
-			    	$('#info-modal').modal();
+			  			// alert('Data antrian telah direset !');
+			  			// console.log(r);
+			  			unlock_browser();
+			  		});
 
-		  			// alert('Data antrian telah direset !');
-		  			// console.log(r);
-		  			unlock_browser();
-		  		});
+		  		}else{
+			  		unlock_browser();
+
+		  		}
+		  		
 		  	}
 		  });
 		  $('a#shutdownPc').on('click',()=>{
+		  	$(".contextmenu").hide();
 		  	if(confirm('Apakah Anda yakin ingin mematikan mesin ?')){
 		  		let postData = {
 
@@ -373,6 +446,7 @@
 		  	}
 		  });
 		  $('a#restartPc').on('click',()=>{
+		  	$(".contextmenu").hide();
 		  	if(confirm('Apakah Anda yakin ingin mematikan mesin ?')){
 		  		let postData = {
 
