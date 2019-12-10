@@ -60,6 +60,26 @@ class Adm extends CI_Controller {
 		$this->load->view('adm/loket/'.$mode, $data);
 	
 	}
+	public function loket_reactivate($item_64){
+	 	$item = json_decode(base64_decode($item_64),true);
+		
+	 	$id = $item['id'];
+		if(!empty($id)){
+	 		$rs = $this->db->where('id',$id)
+	 					   ->where('status',3)
+	 					   ->get('m_antrian_loket');
+	 		if($rs->num_rows() > 0){
+	 			$data = ['status'=>1];
+	 			$this->db->where('id',$id)->update('m_antrian_loket',$data);
+
+	 			$context = new ZMQContext();
+			    $socket = $context->getSocket(ZMQ::SOCKET_PUSH);
+			    $socket->connect('tcp://127.0.0.1:5555');
+			    // // print_r($socket);
+			    $socket->send(json_encode(['cat'=>'onCetakTiket','data'=>$data]));
+	 		}
+	 	}
+	}
 	public function loket_requeue($item_64)
 	{
 	 	$item = json_decode(base64_decode($item_64),true);

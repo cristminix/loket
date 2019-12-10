@@ -3,7 +3,8 @@ function reQueue(item_64){
 		let item = JSON.parse(atob(item_64));
 		// console.log(item);
 		let url = base_url()+'adm/loket_requeue/'+item_64;
-		axios.post(url,{id:item}).then((r)=>{
+		let url_reactivate = base_url()+'adm/loket_reactivate/'+item_64;
+		axios.post(url_reactivate,{id:item}).then((r)=>{
 
 		});
 	}
